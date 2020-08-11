@@ -1,4 +1,5 @@
 from django import forms
+from .models import Image, Searchbar
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 
@@ -22,3 +23,17 @@ class CheckoutForm(forms.Form):
     save_info = forms.BooleanField(required=False)
     payment_option = forms.ChoiceField(
         widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+
+
+class ImageForm(forms.ModelForm):
+    """Form for the image model"""
+    class Meta:
+        model = Image
+        fields = ('title', 'image')
+
+
+class SearchbarForm(forms.ModelForm):
+    """Form for the image model"""
+    class Meta:
+        model = Searchbar
+        fields = ('title',)

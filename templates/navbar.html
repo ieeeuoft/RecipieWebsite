@@ -35,6 +35,16 @@
 
             <!-- Right -->
             <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{% url 'core:upload' %}">
+                        <span class="clearfix d-none d-sm-inline-block"> Add Recipe Feature</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{% url 'core:searchbar' %}">
+                        <span class="clearfix d-none d-sm-inline-block"> Searchbar Feature</span>
+                    </a>
+                </li>
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a href="{% url 'core:order-summary' %}" class=" nav-link waves-effect">

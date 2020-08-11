@@ -5,8 +5,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
-from .forms import CheckoutForm
-from .models import Recipe, OrderRecipe, Order, BillingAddress
+from .forms import CheckoutForm, ImageForm, SearchbarForm
+from .models import Recipe, OrderRecipe, Order, BillingAddress, Image, Searchbar
 
 
 class CheckoutView(View):
@@ -160,3 +160,22 @@ def remove_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order.")
         return redirect("core:product", slug=slug)
+
+
+def image_upload_view(request):
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'imagetest.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ImageForm()
+    return render(request, 'imagetest.html', {'form': form})
+
+
+def searchbar_view(request):
+    form = SearchbarForm()
+    return render(request, 'searchbar.html', {'form': form})
